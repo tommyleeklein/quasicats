@@ -1,0 +1,184 @@
+\documentclass{article}
+\usepackage{eucal}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{charter}
+\usepackage[french]{babel}
+\frenchbsetup{StandardLists=true}
+\usepackage{enumitem}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+%\usepackage[bitstream-charter]{mathdesign}
+\usepackage{quiver} %for commutative diagrams w/ quiver
+%\usepackage{bm} %for bold math symbols
+\usepackage{hyperref}% clickable pdf 
+%\usepackage{float} positioning figures
+%\usepackage{graphicx} inserting figures
+%\usepackage{latexsym}
+\usepackage{array}	
+\usepackage{tikz} %graphs, diagrams
+\usepackage{tikz-cd} %diagrams
+\usetikzlibrary{%
+  matrix,%
+  calc,%
+  arrows%
+}
+%\usepackage{stmaryrd}
+%\usepackage{stackrel}
+%\usepackage{imakeidx}
+
+
+\tikzcdset{scale cd/.style={every label/.append style={scale=#1},
+    cells={nodes={scale=#1}}}}
+
+
+\newcommand{\leftrarrows}{\mathrel{\raise.75ex\hbox{\oalign{%
+  $\scriptstyle\leftarrow$\cr
+  \vrule width0pt height.5ex$\hfil\scriptstyle\relbar$\cr}}}}
+\newcommand{\lrightarrows}{\mathrel{\raise.75ex\hbox{\oalign{%
+  $\scriptstyle\relbar$\hfil\cr
+  $\scriptstyle\vrule width0pt height.5ex\smash\rightarrow$\cr}}}}
+\newcommand{\Rrelbar}{\mathrel{\raise.75ex\hbox{\oalign{%
+  $\scriptstyle\relbar$\cr
+  \vrule width0pt height.5ex$\scriptstyle\relbar$}}}}
+\newcommand{\longleftrightarrows}{\leftrarrows\joinrel\Rrelbar\joinrel\lrightarrows}
+
+\makeatletter
+\def\leftrightarrowsfill@{\arrowfill@\leftrarrows\Rrelbar\lrightarrows}
+\newcommand{\xleftrightarrows}[2][]{\ext@arrow 3399\leftrightarrowsfill@{#1}{#2}}
+\makeatother
+
+
+\usepackage[a4paper, total={6in, 9in}]{geometry}  % Adjusts size of text body 
+
+
+\newcommand{\func}[5]{
+\begin{align*}
+#1 \colon #2 &\longrightarrow #3\\
+  #4 &\longmapsto #5
+\end{align*}
+} 
+\newcommand{\functor}[7]{
+\begin{align*}
+#1 \colon #2 &\longrightarrow #3\\
+  #4 &\longmapsto #5 \\
+  #6&\longmapsto #7
+\end{align*}
+} 
+\newcommand{\tfunctor}[9]{
+\begin{align*}
+#1 \colon #2 &\longrightarrow #3\\
+  #4 &\longmapsto #5 \\
+  #6&\longmapsto #7 \\
+  #8 & \longmapsto #9
+\end{align*}
+} 
+%math mode function def : ex We define a function 
+% 			f : x---->y 
+% 			    z---->t 
+% such that 
+\newcommand{\infunc}[5]{ 
+\begin{array}[t]{rcl}
+#1 \colon #2 &\to #3\\
+  #4 &\mapsto #5
+\end{array}
+} % inline version of the previous command ex : let f: x-->y be such that ...
+	%								         z-->t
+
+\newcommand{\mbc}[1]{\mathbfcal{#1}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\mrm}[1]{\mathrm{#1}} % math roman shortcut 
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Cc}{\mathbb{C}}
+% various mathfont 
+\newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\mf}[1]{\mathbf{#1}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\mfr}[1]{\mathfrak{#1}} % gothic letters 
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert} % norm ll x ll 
+\newcommand{\abs}[1]{\left | #1 \right |} % absolute value lxl 
+\newcommand{\lt}{\left}
+\newcommand{\ri}{\right}
+\newcommand{\set}[1]{\left\lbrace #1 \right\rbrace} % set braces
+\newcommand{\myvec}[1]{\ensuremath{\begin{pmatrix}#1\end{pmatrix}}} % matrices & vectors
+
+\renewcommand{\epsilon}{\varepsilon}
+\newcommand{\angbra}[1]{\left\langle #1 \right\rangle} %angled brackets < - , - > , ex : dot product
+\newcommand{\sbra}[1]{\left[ #1 \right]} %squared brackets [ ... ] 
+\DeclareMathOperator\coker{coker} 
+\newcommand{\bra}[1]{\left( #1 \right)} %correctly sized brackets ( ... ) 
+\DeclareMathOperator{\id}{id}
+\newcommand{\compconj}[1]{%
+  \overline{#1}%
+} % correctly sized complex conjugation (better than \bar) 
+\usepackage{xstring}
+\newcommand{\cat}[1]{
+	\relax
+	\StrLen{#1}[\catarglen]
+	\ifnum\catarglen=1
+		\mathcal{#1}
+	\else
+		\mathbf{#1}
+	\fi
+}
+\newcommand{\Cat}[1]{
+\ifnum #1 = 1
+	\cat{Cat}
+\else 
+	#1\text{-}\cat{Cat}
+\fi 
+			}
+%\usepackage{fancyhdr} Change pagestyle 
+%\pagestyle{fancy}
+%\fancyhead[C]{ }
+%\fancyhead[L]{ }
+%\fancyhead[R]{ }
+%\setlength{\headheight}{15pt}
+
+\DeclareMathOperator{\colim}{colim}
+\DeclareMathOperator{\holim}{holim}
+\DeclareMathOperator{\hocolim}{hocolim}
+\DeclareMathOperator{\Hom}{Hom}
+\newcommand{\C}{\cat{C}}
+\DeclareMathOperator{\End}{End}
+\newcommand{\op}{^\mrm{op}}
+\DeclareMathOperator{\Ob}{Ob}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\Coim}{Coim}
+\DeclareMathOperator{\Img}{Im}
+\DeclareMathOperator{\Fun}{Fun}
+\DeclareMathAlphabet\mathbfcal{OMS}{cmsy}{b}{n}
+\DeclareMathOperator{\IHom}{\underline{\Hom}}
+\DeclareMathOperator{\Ran}{Ran}
+\DeclareMathOperator{\Lan}{Lan}
+\newcommand{\co}{^\mrm{co}}
+\newcommand{\coop}{^\mrm{coop}}
+
+\newenvironment{para}[1][]{\refstepcounter{theorem}\par\medskip
+   \noindent \textbf{\thetheorem} \---- #1 }{\medskip}
+\usepackage{adjustbox}
+
+\begin{document}
+	
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
